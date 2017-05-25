@@ -86,7 +86,7 @@ public class MainView extends JFrame {
 				Server fs = new Server(1988);
 				fs.start();
 				//Chamo o cliente
-				Client fc = new Client(host, 1988, fileName);
+				Client fc = new Client(host, 1988, fileName, fileSize.getText());
 				//Someço a setar o valor da barra de progresso
 				progressBar.setValue((int)fs.percentage);
 				//Esse pedaço é para a barra não ir de 0 a 100 do nada

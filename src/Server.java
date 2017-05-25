@@ -28,16 +28,19 @@ public class Server extends Thread{
 		//Esses são usados para ler o nome do arquivo
 		InputStreamReader nameIn = new InputStreamReader(clientSock.getInputStream());
 		BufferedReader fileNameReader = new BufferedReader(nameIn);
+		//Lendo nome
 		String fileName = fileNameReader.readLine();
-		System.out.println("O nome do arquivo é: " + fileName);
-		
+		System.out.println("Server: O nome do arquivo é: " + fileName);
+		//Lendo tamanho
+		String fileSize = fileNameReader.readLine();
+		System.out.println("Server: O tamanho do arquivo é: "+fileSize);
 		
 		
 		//Crio o inputstream para receber o arquivo e crio o outputstream para escrever no arquivo
 		DataInputStream dataIn = new DataInputStream(clientSock.getInputStream());
 		//Note que por padrão está um arquivo zip, isso deve ser mudado de acordo com o arquivo
 		FileOutputStream fileIn = new FileOutputStream("t"+fileName);
-		System.out.println("Até aqui tudo bem");
+		System.out.println("Server: Até aqui tudo bem");
 		
 		byte[] buffer = new byte[4096];
 		//Variaveis auxialiares
@@ -56,13 +59,13 @@ public class Server extends Thread{
 			}
 			
 			//Para fins de debug
-			System.out.println(remaining);
-			System.out.println(read);
+			System.out.println("Server: Remaining: "+remaining);
+			System.out.println("Server: Read: "+read);
 			System.out.println("=====================");
 			//Escrevo no arquivo
 			fileIn.write(buffer, 0, read);
 		}
-		System.out.println("Terminado");
+		System.out.println("Server: Terminado");
 		percentage=100;
 		fileIn.close();
 		dataIn.close();
