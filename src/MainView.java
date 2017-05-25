@@ -30,6 +30,7 @@ public class MainView extends JFrame {
 				try {
 					MainView frame = new MainView();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -41,6 +42,10 @@ public class MainView extends JFrame {
 	 * Create the frame.
 	 */
 	public MainView() {
+		//Instancio e inicio o servidor
+		Server fs = new Server(1988);
+		fs.start();
+		
 		//Código padrão gerado automaticamente da interface gráfica
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -82,9 +87,8 @@ public class MainView extends JFrame {
 				//Pego o host e o nome do arquivo dos campos de texto
 				String fileName = MainView.fileName.getText();
 				String host = MainView.host.getText();
-				//Instancio e inicio o servidor
-				Server fs = new Server(1988);
-				fs.start();
+				
+				
 				//Chamo o cliente
 				Client fc = new Client(host, 1988, fileName, fileSize.getText());
 				//Someço a setar o valor da barra de progresso

@@ -7,13 +7,32 @@ public class Client{
 	public Client(String host, int port, String file, String fileSize){
 		try{
 			sock = new Socket(host,port);
-			sendFile(file, fileSize);
+			sendFile(file, fileSize, host);
+			sock.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 	
-	public void sendFile(String file, String fileSize) throws IOException{
+	public void sendFile(String file, String fileSize, String host) throws IOException{
+		//===================================================
+		/*
+		InetAddress IPServer = InetAddress.getByName(host);
+		DatagramSocket RTTSock = new DatagramSocket();
+		byte[] sendPkt;
+		sendPkt = ("1").getBytes();
+		DatagramPacket RTTpkt = new DatagramPacket(sendPkt, sendPkt.length, IPServer, 7188);
+		
+		long timer = System.nanoTime();
+		RTTSock.send(RTTpkt);
+		byte[] receiveRTT = new byte[1];
+		DatagramPacket receivedPkt = new DatagramPacket(receiveRTT, receiveRTT.length);
+		RTTSock.receive(receivedPkt);
+		System.out.println("RTT: " + (System.nanoTime()-timer)/1000);
+		RTTSock.close();
+		*/
+		//===================================================
+		
 		//===========================Metadados
 		DataOutputStream fileNameOut = new DataOutputStream(sock.getOutputStream());
 		//Enviando nome
@@ -40,5 +59,7 @@ public class Client{
 		fileIn.close();
 		dataOut.close();
 	}
+	
+	
 	
 }
